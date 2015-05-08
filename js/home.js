@@ -49,12 +49,21 @@ function updateTicket(v, $li){
 	$button.attr('data-articles', v['ArticleNum']);
 	$button.attr('data-id', v['TicketID']);
 	$button.attr('data-num', v['TicketNumber']);
-	$button.prop('data-ticket-priority', parseInt(v['Article'][0]['PriorityID']) >= 4);
 	$button.prop('data-ticket-title', v['Title']);
 	$button.prop('data-ticket-desc', v['Article'][0]['Body']);
+	
+	var priorityId = parseInt(v['Article'][0]['PriorityID']) >= 4;
+	$button.prop('data-ticket-priority', priorityId);
+	if (priorityId)
+	{
+		$li.find('.tag-urgent').removeClass('hidden');
+	}
 
 	var stateId = parseInt(v['StateID']);
 	switch (stateId) {
+	case 1: //new
+		$li.find('.tag-new').removeClass('hidden');
+		break;
 	case 2: //success
 		$li.find('.badge.alert-danger').addClass('hidden');
 		$li.find('.badge.alert-success').removeClass('hidden');
@@ -64,6 +73,7 @@ function updateTicket(v, $li){
 		$li.find('.badge.alert-danger').removeClass('hidden');
 		break;
 	default:
+		$li.find('.tag-working').removeClass('hidden');
 		$li.find('.badge.alert-success').addClass('hidden');
 		$li.find('.badge.alert-danger').addClass('hidden');
 	}

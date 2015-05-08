@@ -121,6 +121,16 @@
 					<li class="well"><span class="badge alert-info"><span
 							data-name="ArticleNum">?</span> <span title="aggiornamenti"
 							class="glyphicon glyphicon-comment"></span></span> <!-- span class="badge alert-info"><span  data-name="AttachmentNum">?</span> <span title="allegati" class="glyphicon glyphicon-paperclip"></span></span -->
+						<span class="tag-new badge btn-default tagSize hidden">
+							<span title="nuovo" class="glyphicon glyphicon-asterisk alert-info"></span>
+						</span>
+						<span class="tag-working badge btn-default tagSize hidden">
+							<span title="presa in carico" class="glyphicon glyphicon-thumbs-up  alert-success"></span>
+						</span>
+						<span class="tag-urgent badge btn-default tagSize hidden">
+							<span title="urgente" class="glyphicon glyphicon-fire alert-danger"></span>
+						</span>
+						</span>
 						<div class="pull-right">
 							<button data-toggle="modal" data-target="#ticketModal"
 								class="pull-right btn btn-xs btn-default" data-service-id="?"
@@ -282,6 +292,24 @@
 							<span class="badge alert-info">N <span
 								class="glyphicon glyphicon-paperclip"></span></span> <b>N</b> Allegati
 							<small>(non attivo nella demo)</small>
+						</p>
+						<p>
+							<span class="badge btn-default tagSize">
+								<span title="nuovo" class="glyphicon glyphicon-asterisk alert-info"></span>
+							</span>
+							Nuova (non ancora in carico)
+						</p>
+						<p>
+							<span class="badge btn-default tagSize">
+								<span title="presa in carico" class="glyphicon glyphicon-thumbs-up  alert-success"></span>
+							</span>
+							Presa in carico (in lavorazione)
+						</p>
+						<p>
+							<span class="badge btn-default tagSize">
+								<span title="urgente" class="glyphicon glyphicon-fire alert-danger"></span>
+							</span>
+							Urgente!
 						</p>
 						<p>
 							<button class="btn btn-xs btn-default">

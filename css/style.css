@@ -489,3 +489,8 @@ span.glyphicon {
 	top: inherit;
 	line-height: inherit;
 }
+
+.tagSize
+{
+	font-size:	13px;
+}
