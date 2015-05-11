@@ -1,8 +1,8 @@
 <script type="text/javascript">
 <!--
 $( function($) {
-    $( '#welcome' ).modal({
-	});
+//  $( '#welcome' ).modal({
+// 	});
 
     $( '#welcome div.modal-xl' ).css( "width", $(window).innerWidth()-50 );
 	

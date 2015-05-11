@@ -49,6 +49,7 @@
 <script type="text/javascript" src="js/script.js"></script>
 
 <script type="text/javascript" src="js/home.js"></script>
+<script type="text/javascript" src="js/filter.js"></script>
 <script type="text/javascript" src="js/ticket.js"></script>
 <script type="text/javascript" src="js/welcome.js"></script>
 <script type="text/javascript" src="js/login.js"></script>
@@ -143,10 +144,11 @@ var bozzeStateIds = [ 1, 4, 6, 7, 8 ];		/* todo@ajax getOtrsInlavStateIds */
 var chiuseStateIds = [ 2, 3, 10 ];			/* todo@ajax getOtrsChiuseStateIds */
 
 /* Ajax Calls */
-var logoff_url = "/hd0/test/frontend/logoff";		  /* todo@businessLogic */
-var category_url = "/hd0/test/frontend/categoryList"; /* todo@businessLogic */
-var ticket_url = "/hd0/test/frontend/ticketLists";	  /* todo@businessLogic */
-var settings_url = "/hd0/test/frontend/settings";	  /* todo@businessLogic */
+var logoff_url = "/hd0/test/frontend/logoff";
+var category_url = "/hd0/test/frontend/categoryList";
+var ticket_url = "/hd0/test/frontend/ticketLists";
+var settings_url = "/hd0/test/frontend/settings";
+var articles_url = '/hd0/test/frontend/getArticles';
 
 /* Env vars */
 var cookieExpires	= (10 * 365);
@@ -169,6 +171,7 @@ var cookiePath		= '/';
 
 	</div>
 
+	<div data-include="inc/filter.inc"></div>
 	<div data-include="inc/ticket.inc"></div>
 	<div data-include="inc/welcome.inc"><!-- 'user' => $user --></div>
 	<div data-include="inc/login.inc"><!-- 'user' => $user --></div>

@@ -85,24 +85,28 @@
 							id="qN_chiuse" data-name="counter" title="segnalazioni chiuse"
 							class="badge alert-success">0</span></a>
 						<div class="pull-right">
-							<!-- standard -->
+							<!-- standard ->
 							<button data-toggle="modal" data-target="#ticketModal"
 								class="btn btn-xs btn-primary" data-service-id="N"
 								data-queue-id="N" data-queue-name="N" data-queue-color="color-N"
 								data-id="0" data-num="N" data-ticket-priority="0"
 								data-articles="0" data-ticket-desc="">
-							<!-- with taxonomy ->
+							<!-- end standard -->
+							<!-- with taxonomy -->
 							<button data-toggle="modal" data-target="#filterModal"
 								class="btn btn-xs btn-primary" data-service-id="N"
 								data-queue-id="N" data-queue-name="N" data-queue-color="color-N"
 								data-id="0" data-num="N" data-ticket-priority="0"
 								data-articles="0" data-ticket-desc=""
-								data-question-1_0="Quando hai riscontrato il guasto?"
-								data-responce-1_0="{'0':'---','1':'Non riesci ad eccedere al servizio','2':'Si vede male','3':'Altro'}"
-								data-question-2_1="Si blocca durante la fase di stampa?"
-								data-responce-2_1="{'0':'---','1':'Si','2':'No'}">
-							<!- -->
-								<span title="apri una nuova segnalazione"
+								data-questions="" data-responces=""
+								<!-- 
+								questions="{1:{0:'Quando hai riscontrato il guasto?'},
+											2:{1:'Si blocca durante la fase di stampa?'}}"
+								responces="{1:{0:{'0':'---','1':'Non riesci ad eccedere al servizio','2':'Si vede male','3':'Altro'}},
+											2:{1:{'0':'---','1':'Si','2':'No'}}}"
+								-->
+							<!-- end taxonomy -->
+								<span title="Apri una Nuova Segnalazione"
 									class="glyphicon glyphicon-plus"></span>
 							</button>
 						</div>

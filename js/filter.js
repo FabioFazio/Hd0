@@ -1,5 +1,44 @@
-function onShowTicketModal (e) {
-    var $related = $(e.relatedTarget);
+function onShowFilterModal (e) {
+	
+	/////////////////////////////////////////////
+	/////////////// __WIZARD__ //////////////////
+	/////////////////////////////////////////////    
+    
+    $('#rootwizard').bootstrapWizard(
+    		{
+    			onTabShow: function(tab, navigation, index) {
+    					// Stato di avanzamento
+						var $total = navigation.find('li').length;
+						var $current = index+1;
+						var $percent = ($current/$total) * 100;
+						$('#rootwizard').find('.bar').css({width:$percent+'%'});
+						if ($percent == 100)
+							$('#rootwizard').find('.bar').addClass('progress-bar-success');
+						else
+							$('#rootwizard').find('.bar').removeClass('progress-bar-success');
+						if ($current == 1)
+							$('#rootwizard').find('.bar').addClass('progress-bar-warning');
+						else
+							$('#rootwizard').find('.bar').removeClass('progress-bar-warning');
+						// Per l'ultimo tab attivare il bottone di chiusura
+						if($current >= $total) {
+							$('#rootwizard').find('.pager .next').hide();
+							$('#rootwizard').find('.pager .finish').show();
+							$('#rootwizard').find('.pager .finish').css({display: 'inline'});
+							$('#rootwizard').find('.pager .finish').removeClass('disabled');
+						} else {
+							$('#rootwizard').find('.pager .next').show();
+							$('#rootwizard').find('.pager .finish').hide();
+						}
+					},
+				onTabClick: function(tab, navigation, index) {
+						return false;
+					}
+    		});
+	
+}
+/*
+	var $related = $(e.relatedTarget);
     var $current = $(e.currentTarget);
 
     var assignments = { // true: attr false: prop
@@ -13,6 +52,8 @@ function onShowTicketModal (e) {
 			"ticket-priority":   false,
 			"ticket-title"   :   false,
 			"ticket-desc"    :   false,
+			"questions"		 :   false,
+			"responces"		 :   false,
 	};
     
     if ($related.length)
@@ -101,7 +142,7 @@ function loadArticles ($current) {
 	
     var $target = $('#articoli');
     var request = {id : id, 'service-id': serviceId};
-    var url = articles_url;
+    var url = '/hd0/test/frontend/getArticles';
     
     $.ajax({
         type: 'post',
@@ -162,4 +203,4 @@ function updateArticle (a, $articolo)
 	$articolo.find('span[data-name="body"]')
 	   .empty().html(a['Body'].replace(/\n/g, "<br/>"));
 	return $articolo;
-}
+}*/
