@@ -1,3 +1,82 @@
+function onShowTicketModal (e) {
+    var $related = $(e.relatedTarget);
+    var $current = $(e.currentTarget);
+
+    var assignments = { // true: attr false: prop
+    		"service-id"     :   true,
+			"queue-id"       :   true,
+			"queue-name"     :   true,
+			"queue-color"    :   true,
+			"id"             :   true,
+			"num"            :   true,
+			"articles"       :   true,
+			"ticket-priority":   false,
+			"ticket-title"   :   false,
+			"ticket-desc"    :   false,
+	};
+    
+    if ($related.length)
+    {
+        $.each(assignments, function(index, attr){
+
+            var data = (attr)?$related.data(index):$related.prop('data-'+index);
+
+            $current.find('input:hidden[name="'+index+'"]').prop('value',data);
+
+            var $items = $current.find('*[data-name="'+index+'"][data-prop]');
+             
+            $items.each(function(k, item){
+            	  var $item = $(item);
+            	  $item.prop($item.data('prop'), data);
+                });
+             
+            $items = $current.find('*[data-name="'+index+'"]').not('*[data-prop]');
+            $items.text(data);
+
+            $current.find('.'+index).removeClass(removeMetaColors).addClass(data);
+        });
+        
+        $current.find('#ticketQueue').text( $('#ticketQueue').text().trimToLength(10) );
+        
+        if (parseInt($current.find('input:hidden[name="id"]').val())>0){
+
+            // mostra box articoli
+        	$current.find('.articoli').removeClass('hidden');
+        	if(parseInt($current.find('input:hidden[name="articles"]').val())>0)
+        		$('#articoli').removeClass('hidden');
+        	else
+        		$('#articoli').addClass('hidden');
+        	// blocca gli input
+        	$current.find('input').add($current.find('textarea')).each(
+                	function(){this.disabled = true;});
+        	$("#priority .btn").addClass('disabled');
+        	// bottoni sono per chiusura
+        	$("#send").add("#cancel").addClass('hidden');
+        	$("#close").removeClass('hidden');
+        	// popola articoli
+            loadArticles($current);
+            // reset articoli
+            $current.find('#articoli [role="tabpanel"]').collapse('hide');
+        }else{
+
+            // nascondi box articoli
+        	$current.find('.articoli').addClass('hidden');
+        	// abilita gli input
+        	$current.find('input').add($current.find('textarea')).each(
+                	function(){this.disabled = false;});
+        	// bottoni per il submit
+        	$("#priority .btn").removeClass('disabled');
+        	$("#send").add("#cancel").removeClass('hidden');
+        	$("#close").addClass('hidden');
+    	}
+    }
+    
+    colorize($current);
+    $('.alert', $current.find('span[name="feedback"]') ).alert('close');
+    priorityButton();
+    $("#priority .btn").on('click', priorityButton);
+}
+
 function priorityButton (e) {
    var $button = e? $(this) : $('#priority .btn');
    var $input = $button.find('input:checkbox');
