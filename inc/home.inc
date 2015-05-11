@@ -82,11 +82,23 @@
 							id="qN_chiuse" data-name="counter" title="segnalazioni chiuse"
 							class="badge alert-success">0</span></a>
 						<div class="pull-right">
+							<!-- standard -->
 							<button data-toggle="modal" data-target="#ticketModal"
 								class="btn btn-xs btn-primary" data-service-id="N"
 								data-queue-id="N" data-queue-name="N" data-queue-color="color-N"
 								data-id="0" data-num="N" data-ticket-priority="0"
 								data-articles="0" data-ticket-desc="">
+							<!-- with taxonomy ->
+							<button data-toggle="modal" data-target="#filterModal"
+								class="btn btn-xs btn-primary" data-service-id="N"
+								data-queue-id="N" data-queue-name="N" data-queue-color="color-N"
+								data-id="0" data-num="N" data-ticket-priority="0"
+								data-articles="0" data-ticket-desc=""
+								data-question-1_0="Quando hai riscontrato il guasto?"
+								data-responce-1_0="{'0':'---','1':'Non riesci ad eccedere al servizio','2':'Si vede male','3':'Altro'}"
+								data-question-2_1="Si blocca durante la fase di stampa?"
+								data-responce-2_1="{'0':'---','1':'Si','2':'No'}">
+							<!- -->
 								<span title="apri una nuova segnalazione"
 									class="glyphicon glyphicon-plus"></span>
 							</button>
@@ -112,7 +124,12 @@
 					<div class="col-md-10 col-sm-10" data-name="Title">Default
 						Title</div>
 					<div
-						class="col-sm-offset-1 col-md-offset-1 col-md-1 badge queue-color">
+						class="col-sm-1 col-md-1 badge">
+						<span data-name="Author" data-prop="title"
+							title="Default Author" class="glyphicon glyphicon-user tagQueue"></span>
+					</div>
+					<div
+						class="col-md-1 badge queue-color">
 						<span data-name="QueueName" data-prop="title"
 							title="Default Queue" class="glyphicon glyphicon-tag tagQueue"></span>
 					</div>
