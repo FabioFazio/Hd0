@@ -41,6 +41,9 @@ function updateTicket(v, $li){
 	$li.find('*[data-name="QueueName"][data-prop]').each(function(){
 		$(this).prop($(this).data('prop'), v['QueueName']);});
 
+	$li.find('*[data-name="Author"][data-prop]').each(function(){
+		$(this).prop($(this).data('prop'), v['Author']);});
+	
 	var $button = $li.find('button[data-toggle]');
 	$button.attr('data-service-id', v['ServiceId']);
 	$button.attr('data-queue-id', v['QueueID']);
@@ -168,8 +171,7 @@ function populate(data){
 	$chiuseTicket.siblings("li").not($currentList).not('#chiuse_empty').remove();
 }
 
-function updateCategory (q, $categoria)
-{
+function updateCategory (q, $categoria){
 	$categoria
 		.attr('id', 'q'+q['order'])
 		.removeClass('color-?')
