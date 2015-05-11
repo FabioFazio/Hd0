@@ -186,7 +186,12 @@
 					<div class="col-md-10 col-sm-10" data-name="Title">Default
 						Title</div>
 					<div
-						class="col-sm-offset-1 col-md-offset-1 col-md-1 badge queue-color">
+						class="col-sm-1 col-md-1 badge">
+						<span data-name="Author" data-prop="title"
+							title="Default Author" class="glyphicon glyphicon-user tagQueue"></span>
+					</div>
+					<div
+						class="col-md-1 badge queue-color">
 						<span data-name="QueueName" data-prop="title"
 							title="Default Queue" class="glyphicon glyphicon-tag tagQueue"></span>
 					</div>
