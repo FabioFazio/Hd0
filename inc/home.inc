@@ -49,6 +49,9 @@
 	    });
 	    
 	    $('[data-toggle="tooltip"][title]').tooltip(optTooltBase);
+
+	    // New tooltips with Toastr
+	    alertTitle();
 		
 		content();
 	});
@@ -126,27 +129,36 @@
 					<div
 						class="col-sm-1 col-md-1 badge">
 						<span data-name="Author" data-prop="title"
-							title="Default Author" class="glyphicon glyphicon-user tagQueue"></span>
+							title="Autore" class="glyphicon glyphicon-user tagQueue"></span>
 					</div>
 					<div
 						class="col-md-1 badge queue-color">
 						<span data-name="QueueName" data-prop="title"
-							title="Default Queue" class="glyphicon glyphicon-tag tagQueue"></span>
+							title="Categoria" class="glyphicon glyphicon-tag tagQueue"></span>
 					</div>
 				</div>
 				<ol>
-					<li class="well"><span class="badge alert-info"><span
-							data-name="ArticleNum">?</span> <span title="aggiornamenti"
-							class="glyphicon glyphicon-comment"></span></span> <!-- span class="badge alert-info"><span  data-name="AttachmentNum">?</span> <span title="allegati" class="glyphicon glyphicon-paperclip"></span></span -->
+					<li class="well">
+						<span class="badge alert-info"><span data-name="ArticleNum">?</span>
+							<span title="aggiornamenti"
+							class="glyphicon glyphicon-comment"></span>
+						</span>
+						
+						<!-- span class="badge alert-info"><span  data-name="AttachmentNum">?</span> <span title="allegati" class="glyphicon glyphicon-paperclip"></span></span -->
+						
 						<span class="tag-new badge btn-default tagSize hidden">
-							<span title="nuovo" class="glyphicon glyphicon-asterisk alert-info"></span>
+							<span title="Nuovo" data-prop="title"
+								class="glyphicon glyphicon-asterisk alert-info"></span>
 						</span>
+						
 						<span class="tag-working badge btn-default tagSize hidden">
-							<span title="presa in carico" class="glyphicon glyphicon-thumbs-up  alert-success"></span>
+							<span title="Presa in Carico" data-prop="title"
+								class="glyphicon glyphicon-thumbs-up  alert-success"></span>
 						</span>
+						
 						<span class="tag-urgent badge btn-default tagSize hidden">
-							<span title="urgente" class="glyphicon glyphicon-fire alert-danger"></span>
-						</span>
+							<span title="Urgente!" data-prop="title"
+								class="glyphicon glyphicon-fire alert-danger"></span>
 						</span>
 						<div class="pull-right">
 							<button data-toggle="modal" data-target="#ticketModal"
@@ -158,7 +170,8 @@
 								data-articles="0">
 								<span title="apri" class="glyphicon glyphicon-zoom-in"></span>
 							</button>
-						</div></li>
+						</div>
+					</li>
 				</ol>
 			</li>
 		</ol>
@@ -188,22 +201,36 @@
 					<div
 						class="col-sm-1 col-md-1 badge">
 						<span data-name="Author" data-prop="title"
-							title="Default Author" class="glyphicon glyphicon-user tagQueue"></span>
+							title="Autore" class="glyphicon glyphicon-user tagQueue"></span>
 					</div>
 					<div
 						class="col-md-1 badge queue-color">
 						<span data-name="QueueName" data-prop="title"
-							title="Default Queue" class="glyphicon glyphicon-tag tagQueue"></span>
+							title="Categoria" class="glyphicon glyphicon-tag tagQueue"></span>
 					</div>
 				</div>
 				<ol>
-					<li class="well"><span class="badge alert-success"><span
-							title="risolta con successo" class="glyphicon glyphicon-ok"></span></span>
+					<li class="well">
+						<span class="badge alert-success"><span
+							title="Risolta con Successo!" data-prop="title"
+								class="glyphicon glyphicon-ok"></span>
+						</span>
 						<span class="badge alert-danger"><span
-							title="chiusa senza successo" class="glyphicon glyphicon-remove"></span></span>
+							title="Chiusa senza Successo!" data-prop="title"
+								class="glyphicon glyphicon-remove"></span>
+						</span>
+						
 						<span class="badge alert-info"><span data-name="ArticleNum">?</span>
-							<span title="aggiornamenti" class="glyphicon glyphicon-comment"></span></span>
+							<span title="Aggiornamenti" class="glyphicon glyphicon-comment"></span>
+						</span>
+						
 						<!-- span class="badge alert-info"><span  data-name="AttachmentNum">?</span> <span title="allegati" class="glyphicon glyphicon-paperclip"></span></span -->
+						
+						<span class="tag-urgent badge btn-default tagSize hidden">
+							<span title="Urgente!" data-prop="title"
+								class="glyphicon glyphicon-fire alert-danger"></span>
+						</span>
+												
 						<div class="pull-right">
 							<button data-toggle="modal" data-target="#ticketModal"
 								class="pull-right btn btn-xs btn-default" data-queue-id="0"
@@ -213,7 +240,8 @@
 								data-articles="0">
 								<span title="apri" class="glyphicon glyphicon-zoom-in"></span>
 							</button>
-						</div></li>
+						</div>
+					</li>
 				</ol>
 			</li>
 		</ol>
@@ -302,6 +330,10 @@
 					role="tabpanel" aria-labelledby="headingThree">
 					<div class="panel-body">
 						<p>
+							<span class="badge"><span  class="glyphicon glyphicon-user"></span></span>
+							Autore della Segnalazione
+						</p>
+						<p>
 							<span class="badge"><span class="glyphicon glyphicon-tag"></span></span>
 							Colore di Categoria
 						</p>
@@ -323,9 +355,9 @@
 						</p>
 						<p>
 							<span class="badge btn-default tagSize">
-								<span title="presa in carico" class="glyphicon glyphicon-thumbs-up  alert-success"></span>
+								<span title="presa in Carico" class="glyphicon glyphicon-thumbs-up  alert-success"></span>
 							</span>
-							Presa in carico (in lavorazione)
+							Presa in Carico (in lavorazione)
 						</p>
 						<p>
 							<span class="badge btn-default tagSize">
@@ -355,6 +387,10 @@
 					role="tabpanel" aria-labelledby="headingFour">
 					<div class="panel-body">
 						<p>
+							<span class="badge"><span  class="glyphicon glyphicon-user"></span></span>
+							Autore della Segnalazione
+						</p>
+						<p>
 							<span class="badge"><span class="glyphicon glyphicon-tag"></span></span>
 							Colore di Categoria
 						</p>
@@ -381,6 +417,12 @@
 							<span class="badge alert-info">N <span
 								class="glyphicon glyphicon-paperclip"></span></span> <b>N</b> Allegati
 							<small>(non attivo nella demo)</small>
+						</p>
+						<p>
+							<span class="badge btn-default tagSize">
+								<span title="urgente" class="glyphicon glyphicon-fire alert-danger"></span>
+							</span>
+							Urgente!
 						</p>
 						<p>
 							<button class="btn btn-xs btn-default">

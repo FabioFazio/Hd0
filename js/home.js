@@ -1,3 +1,11 @@
+function alertTitle () {
+	$('ol.bugsBox').on('click', 'span[data-prop="title"]', function() {
+			window.console&&console.log($(this).attr('title'));
+    		toastr["info"]($(this).attr('title'));
+    	}
+	);
+}
+
 function removeColors (index, css) {
     return (css.match (/(^|\s)bg-\S+/g) || []).join(' ');
 }
@@ -39,10 +47,10 @@ function updateTicket(v, $li){
 	$li.find('*[data-name="ArticleNum"]').not('[data-prop]').empty().html(v['ArticleNum']);
 	$li.find('.queue-color').removeClass(removeMetaColors).addClass(v['QueueColor']);
 	$li.find('*[data-name="QueueName"][data-prop]').each(function(){
-		$(this).prop($(this).data('prop'), v['QueueName']);});
+		$(this).prop($(this).data('prop'), $(this).prop($(this).data('prop')).split(':')[0] +': '+ v['QueueName']);});
 
 	$li.find('*[data-name="Author"][data-prop]').each(function(){
-		$(this).prop($(this).data('prop'), v['Author']);});
+		$(this).prop($(this).data('prop'), $(this).prop($(this).data('prop')).split(':')[0] +': '+ v['Author']);});
 	
 	var $button = $li.find('button[data-toggle]');
 	$button.attr('data-service-id', v['ServiceId']);
