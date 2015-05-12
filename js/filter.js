@@ -1,5 +1,70 @@
-function onShowFilterModal (e) {
-	
+// mock
+var questions=
+{0:{0:'Da quale dispositivo hai acceduto al servizio?'},
+	1:{
+		0:'In che momento si è riscontrato il problema?',
+		1:'Che browser hai utilizzato per accedere al servizio?',
+		3:'Che modello di smarphone hai utilizzato per accedere al servizio?'
+	}
+};
+var responces=
+{
+	0:{
+		0:{0:'---', 1:'PC', 2:'Tablet', 3:'Smartphone', 4:'Altro'}
+	},
+	1:{
+		0:{0:'---', 1:'Accesso al servizio',
+			2:'Gestione delle utenze',
+			3:'Finalizzazione di una stampa',
+			4:'Altro'
+		},
+		1:{0:'---', 1:'Internet Explorer',
+			2:'Firefox', 3:'Chrome', 4:'Altro'
+		},
+		3:{0:'---', 1:'Android',
+			2:'IPhone', 3:'Windows Mobile', 4:'Altro'
+		}
+	}
+};
+// end mock
+var continueText = 'Per procedere premere il tasto di creazione in basso a destra.';
+
+function onShowFilterModal (e)
+{
+	var $related = $(e.relatedTarget);
+    var $current = $(e.currentTarget);
+
+    var assignments = { // true: attr false: prop
+    		"service-id"     :   true,
+			"queue-id"       :   true,
+			"queue-name"     :   true,
+			"queue-color"    :   true,
+			"id"             :   true,
+			"num"            :   true,
+			"articles"       :   true,
+			"ticket-priority":   false,
+			"ticket-title"   :   false,
+			"ticket-desc"    :   false,
+			"questions"		 :   false,
+			"responces"		 :   false,
+	};
+    
+    $.each(assignments, function(index, attr){
+
+        var data = (attr)?$related.data(index):$related.prop('data-'+index);
+        var $item = $current.find('#ticketLaucher');
+        
+        if (attr)
+        	$item.attr('data-'+index, data);
+        else
+        	$item.prop('data-'+index, data);
+    });
+    
+    //var questions = $related.prop('data-questions');
+    //var responces = $related.prop('data-responces');
+    
+    populateSteps($current, questions, responces);
+    
 	/////////////////////////////////////////////
 	/////////////// __WIZARD__ //////////////////
 	/////////////////////////////////////////////    
@@ -22,21 +87,95 @@ function onShowFilterModal (e) {
 							$('#rootwizard').find('.bar').removeClass('progress-bar-warning');
 						// Per l'ultimo tab attivare il bottone di chiusura
 						if($current >= $total) {
-							$('#rootwizard').find('.pager .next').hide();
+							//$('#rootwizard').find('.pager .next').hide();
 							$('#rootwizard').find('.pager .finish').show();
 							$('#rootwizard').find('.pager .finish').css({display: 'inline'});
 							$('#rootwizard').find('.pager .finish').removeClass('disabled');
 						} else {
-							$('#rootwizard').find('.pager .next').show();
+							//$('#rootwizard').find('.pager .next').show();
+							$('#rootwizard').find('.pager .closer').addClass('fright');
 							$('#rootwizard').find('.pager .finish').hide();
 						}
 					},
 				onTabClick: function(tab, navigation, index) {
 						return false;
 					}
-    		});
-	
+    		}
+		);
 }
+
+function populateSteps ($current, questions, responces)
+{
+	var steps = questions.length;
+	
+	if (steps != responces.length){
+		window.console&&console.log('Taxonomie Error: Question and Resp not aligned!');
+		return;
+	}
+	
+	var $tab0 = $current.find('#tab0');
+	var $sel0 = $current.find('#q_0-0');
+	
+	$current.find('.pager .first').click();
+	
+	$tab0.find('label').text(questions[0][0]);
+	$sel0.find('option').remove();
+	$.each(responces[0][0], function(index, value) {
+		$sel0.append($("<option />").val(index).text(value));
+	});
+	
+	$sel0.on('change', function(e)
+		{
+			var res = $(this).val();
+			if(e && res > 0){
+				var $tab1 = $current.find('#tab1');
+				var $laucher = $current.find('#ticketLaucher');
+				var $close = $current.find('.closer');
+				
+				$tab1.html($tab0.html());
+				$laucher.attr('data-filter', res);
+				
+				if (res in questions[1])
+				{
+					if (!(res in responces[1])){
+						window.console&&console.log('Taxonomie Error: Question '+res+' without resp!');
+						return;
+					}
+					$tab1.find('label').text(questions[1][res]);
+					var $sel1 = $tab1.find('select');
+					$sel1.attr('id','q_1-'+res)
+					$sel1.find('option').remove();
+					$.each(responces[1][res], function(index, value) {
+						$sel1.append($("<option />").val(res+'-'+index).text(value));
+					});
+					
+					$sel1.on('change', function(e){
+						var res = parseInt($(this).val().split('-').pop());
+						if(e && res > 0){
+							$laucher.removeClass('hidden');
+							$close.removeClass('fright');
+						} else {
+							$laucher.addClass('hidden');
+							$close.addClass('fright');
+						}
+					});
+					
+					$laucher.on('click', function(e){
+						$laucher.attr('data-filter', $sel1.val());
+					});
+					
+					$laucher.addClass('hidden');
+				}else{
+					$tab1.find('label').text(continueText);
+					$tab1.find('select').remove();
+					$laucher.removeClass('hidden');
+					$close.removeClass('fright');
+				}
+				$current.find('.pager .next').click();
+			}
+		});
+}
+
 /*
 	var $related = $(e.relatedTarget);
     var $current = $(e.currentTarget);

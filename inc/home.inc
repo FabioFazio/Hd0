@@ -99,12 +99,36 @@
 								data-id="0" data-num="N" data-ticket-priority="0"
 								data-articles="0" data-ticket-desc=""
 								data-questions="" data-responces=""
-								<!-- 
-								questions="{1:{0:'Quando hai riscontrato il guasto?'},
-											2:{1:'Si blocca durante la fase di stampa?'}}"
-								responces="{1:{0:{'0':'---','1':'Non riesci ad eccedere al servizio','2':'Si vede male','3':'Altro'}},
-											2:{1:{'0':'---','1':'Si','2':'No'}}}"
-								-->
+<!-- 
+	questions="
+	{0:{0:'Da quale dispositivo hai acceduto al servizio?'},
+	1:{
+		0:'In che momento si è riscontrato il problema?',
+		1:'Che browser hai utilizzato per accedere al servizio?',
+		3:'Che modello di smarphone hai utilizzato per accedere al servizio?'
+		}
+	}"
+	responces="
+	{0:{
+		0:{0:'---', 1:'PC',
+			2:'Tablet',
+			3:'Smartphone',
+			4:'Altro'
+			}
+		},
+	1:{
+		0:{0:'---', 1:'Accesso al servizio',
+			2:'Gestione delle utenze',
+			3:'Finalizzazione di una stampa'
+			4:'Altro'
+			},
+		1:{0:'---', 1:'Internet Explorer',
+			2:'Firefox', 3:'Chrome', 4:'Altro'},
+		3:{0:'---', 1:'Android',
+			2:'IPhone', 3:'Windows Mobile', 4:'Altro'}
+		}
+	}"
+-->
 							<!-- end taxonomy -->
 								<span title="Apri una Nuova Segnalazione"
 									class="glyphicon glyphicon-plus"></span>
